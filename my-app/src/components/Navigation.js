@@ -1,22 +1,22 @@
 import React from 'react';
 import { MasterForm } from './MasterForm';
 import { GridData } from './GridData';
-import { BrowserRouter as Router, Route, NavLink, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 class Navigation extends React.Component {
   render(){
     return(
       <Router>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
-          <Link to="/" className="navbar-brand">Navbar</Link>
-          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <Link className="navbar-brand" to="/">Test</Link>
+          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div className="navbar-nav">
-              <Link to="" className="nav-item nav-link active">Add Record</Link>
+          <div className="collapse navbar-collapse" id="navbarText">
+            <ul className="navbar-nav mr-auto"></ul>
+            <span className="navbar-nav">
               <Link to="/data" className="nav-item nav-link">View Record</Link>
-            </div>
+            </span>
           </div>
         </nav>
 

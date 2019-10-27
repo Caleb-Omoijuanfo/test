@@ -8,23 +8,23 @@ class Form1 extends React.Component {
     return(
       <>
         <div className="form-element">
-          <label for="firstName">First Name</label>
+          <label htmlFor="firstName">First Name</label>
           <p>
-            <input type="text" name="firstName" id="firstName" autofocus="true"/>
+            <input type="text" value={this.props.firstName} onChange={this.props.handleChange} name="firstName" id="firstName" autoFocus={true}/>
           </p>
         </div>
 
         <div className="form-element">
-          <label for="SurName">Surname</label>
+          <label htmlFor="surName">Surname</label>
           <p>
-            <input type="text" name="firstName" id="SurName" autofocus="true"/>
+            <input type="text" value={this.props.surName} onChange={this.props.handleChange} name="surName" id="surName" autoFocus={true}/>
           </p>
         </div>
 
         <div className="form-element">
-          <label for="dob">Date of Birth</label>
+          <label htmlFor="dob">Date of Birth</label>
           <p>
-            <input type="date" name="firstName" id="dob" autofocus="true"/>
+            <input type="text" value={this.props.dob} placeholder="e.g 15/04/1998" onChange={this.props.handleChange} name="dob" id="dob" autoFocus={true}/>
           </p>
         </div>
       </>
