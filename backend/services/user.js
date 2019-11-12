@@ -203,6 +203,7 @@ const Users = {
 
         //Update document by users id
         collection.updateOne({ id: Number(data.id) }, { $set: { firstName: data.firstName } }, { upsert: true}, function(err, docs) {
+          console.log(data);
           if(!err){
             response['status'] = "success";
             response['data'] = docs;
@@ -235,6 +236,7 @@ const Users = {
 
         //Update document by users id
         collection.updateOne({ id: Number(data.id) }, { $set: { surName: data.surName } }, { upsert: true}, function(err, docs) {
+          console.log(data);
           if(!err){
             response['status'] = "success";
             response['data'] = docs;

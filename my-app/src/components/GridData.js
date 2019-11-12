@@ -1,8 +1,8 @@
 import React from 'react';
-import { IconButton } from '@material-ui/core';
-import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { IconButton } from '@material-ui/core';
 import { Paper } from '@material-ui/core';
+import { UpdateModal } from './Modal';
 import axios from 'axios';
 import formurlencoded from 'form-urlencoded';
 
@@ -80,6 +80,7 @@ class GridData extends React.Component {
   }
 
   updateFirstName = (id) => {
+    console.log(id);
     axios({
       url: 'http://localhost:5000/user/firstName',
       method: 'put',
@@ -91,11 +92,30 @@ class GridData extends React.Component {
         firstName: this.state.firstName
       })
     })
+    .then(res => {
+      //Trigger component re-render to update state of data
+      this.setState({
+        isLoading: true
+      })
+      axios.get('http://localhost:5000/user')
+      .then(res => {
+        const users = res.data.data.map(
+          obj => obj
+        );
+        this.setState({ users });
+      })
+      .finally(() =>{
+        this.setState({isLoading: false})
+      })
+    })
+    .catch(error => {
+      console.log(error.message);
+    })
   };
 
   updateLastName = (id) => {
     axios({
-      url: 'http://localhost:5000/user/surName',
+      url: 'http://localhost:5000/user/lastName',
       method: 'put',
       headers: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -104,6 +124,25 @@ class GridData extends React.Component {
         id: id,
         surName: this.state.surName
       })
+    })
+    .then(res => {
+      //Trigger component re-render to update state of data
+      this.setState({
+        isLoading: true
+      })
+      axios.get('http://localhost:5000/user')
+      .then(res => {
+        const users = res.data.data.map(
+          obj => obj
+        );
+        this.setState({ users });
+      })
+      .finally(() =>{
+        this.setState({isLoading: false})
+      })
+    })
+    .catch(error => {
+      console.log(error.message);
     })
   };
 
@@ -119,6 +158,25 @@ class GridData extends React.Component {
         dob: this.state.dob
       })
     })
+    .then(res => {
+      //Trigger component re-render to update state of data
+      this.setState({
+        isLoading: true
+      })
+      axios.get('http://localhost:5000/user')
+      .then(res => {
+        const users = res.data.data.map(
+          obj => obj
+        );
+        this.setState({ users });
+      })
+      .finally(() =>{
+        this.setState({isLoading: false})
+      })
+    })
+    .catch(error => {
+      console.log(error.message);
+    })
   };
 
   updateAge = (id) => {
@@ -132,6 +190,25 @@ class GridData extends React.Component {
         id: id,
         age: this.state.age
       })
+    })
+    .then(res => {
+      //Trigger component re-render to update state of data
+      this.setState({
+        isLoading: true
+      })
+      axios.get('http://localhost:5000/user')
+      .then(res => {
+        const users = res.data.data.map(
+          obj => obj
+        );
+        this.setState({ users });
+      })
+      .finally(() =>{
+        this.setState({isLoading: false})
+      })
+    })
+    .catch(error => {
+      console.log(error.message);
     })
   };
 
@@ -147,6 +224,25 @@ class GridData extends React.Component {
         height: this.state.height
       })
     })
+    .then(res => {
+      //Trigger component re-render to update state of data
+      this.setState({
+        isLoading: true
+      })
+      axios.get('http://localhost:5000/user')
+      .then(res => {
+        const users = res.data.data.map(
+          obj => obj
+        );
+        this.setState({ users });
+      })
+      .finally(() =>{
+        this.setState({isLoading: false})
+      })
+    })
+    .catch(error => {
+      console.log(error.message);
+    })
   };
 
   updateWeight = (id) => {
@@ -160,6 +256,25 @@ class GridData extends React.Component {
         id: id,
         weight: this.state.weight
       })
+    })
+    .then(res => {
+      //Trigger component re-render to update state of data
+      this.setState({
+        isLoading: true
+      })
+      axios.get('http://localhost:5000/user')
+      .then(res => {
+        const users = res.data.data.map(
+          obj => obj
+        );
+        this.setState({ users });
+      })
+      .finally(() =>{
+        this.setState({isLoading: false})
+      })
+    })
+    .catch(error => {
+      console.log(error.message);
     })
   };
 
@@ -236,61 +351,23 @@ class GridData extends React.Component {
                 <td className="data-row">{user.age}</td>
                 <td className="data-row">{user.height}</td>
                 <td className="data-row">{user.weight}</td>
-                <td>
-                  <IconButton data-toggle="modal" data-target="#exampleModal"><EditIcon /></IconButton>
-                  <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div className="modal-dialog" role="document">
-                      <div className="modal-content">
-                        <div className="modal-header">
-                          <h5 className="modal-title" id="exampleModalLabel">Update record</h5>
-                          <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div className="modal-body">
-                          <div className="input-group mb-3">
-                            <input type="text" className="form-control" name="firstName" value={this.state.firstName} onChange={this.handleChange} placeholder="First Name" aria-label="Recipient's username" aria-describedby="basic-addon2" />
-                            <div className="input-group-append">
-                              <button className="btn btn-outline-secondary" type="button" id="button-addon2" onClick={() => this.updateFirstName(user.id)}>Update</button>
-                            </div>
-                          </div>
-                          <div className="input-group mb-3">
-                            <input type="text" className="form-control" name="surName" value={this.state.surName} onChange={this.handleChange} placeholder="Last Name" aria-label="Recipient's username" aria-describedby="basic-addon2" />
-                            <div className="input-group-append">
-                              <button className="btn btn-outline-secondary" type="button" id="button-addon2" onClick={() => this.updateLastName(user.id)}>Update</button>
-                            </div>
-                          </div>
-                          <div className="input-group mb-3">
-                            <input type="text" className="form-control" name="dob" value={this.state.dob} onChange={this.handleChange} placeholder="Date of Birth" aria-label="Recipient's username" aria-describedby="basic-addon2" />
-                            <div className="input-group-append">
-                              <button className="btn btn-outline-secondary" type="button" id="button-addon2" onClick={() => this.updateDob(user.id)}>Update</button>
-                            </div>
-                          </div>
-                          <div className="input-group mb-3">
-                            <input type="text" className="form-control" name="age" value={this.state.age} onChange={this.handleChange} placeholder="Age" aria-label="Recipient's username" aria-describedby="basic-addon2" />
-                            <div className="input-group-append">
-                              <button className="btn btn-outline-secondary" type="button" id="button-addon2" onClick={() => this.updateAge(user.id)}>Update</button>
-                            </div>
-                          </div>
-                          <div className="input-group mb-3">
-                            <input type="text" className="form-control" name="height" value={this.state.height} onChange={this.handleChange} placeholder="Height" aria-label="Recipient's username" aria-describedby="basic-addon2" />
-                            <div className="input-group-append">
-                              <button className="btn btn-outline-secondary" type="button" id="button-addon2" onClick={() => this.updateHeight(user.id)}>Update</button>
-                            </div>
-                          </div>
-                          <div className="input-group mb-3">
-                            <input type="text" className="form-control" name="weight" value={this.state.weight} onChange={this.handleChange} placeholder="Weight" aria-label="Recipient's username" aria-describedby="basic-addon2" />
-                            <div className="input-group-append">
-                              <button className="btn btn-outline-secondary" type="button" id="button-addon2" onClick={() => this.updateWeight(user.id)}>Update</button>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="modal-footer">
-                          <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                <td className="data-row" id={user.id}>
+                  <UpdateModal
+                    unique={user.id}
+                    updateFirstName={() => this.updateFirstName(user.id)}
+                    updateLastName={() => this.updateLastName(user.id)}
+                    updateDob={() => this.updateDob(user.id)}
+                    updateAge={() => this.updateAge(user.id)}
+                    updateHeight={() => this.updateHeight(user.id)}
+                    updateWeight={() => this.updateWeight(user.id)}
+                    handleChange={this.handleChange}
+                    firstName={this.state.firstName}
+                    surName={this.state.surName}
+                    dob={this.state.dob}
+                    age={this.state.age}
+                    height={this.state.height}
+                    weight={this.state.weight}
+                  />
                 </td>
                 <td>
                   <IconButton
@@ -314,15 +391,4 @@ class GridData extends React.Component {
   }
 }
 
-export { GridData }
-//
-// <form>
-//   <div className="form-group">
-//     <label htmlFor="recipient-name" className="col-form-label">Recipient:</label>
-//     <input type="text" className="form-control" id="recipient-name" />
-//   </div>
-//   <div className="form-group">
-//     <label htmlFor="message-text" className="col-form-label">Message:</label>
-//     <textarea className="form-control" id="message-text"></textarea>
-//   </div>
-// </form>
+export { GridData };
